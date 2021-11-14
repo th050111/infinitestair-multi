@@ -1,0 +1,160 @@
+
+
+/* .main-menu {
+  display: none;
+} */
+
+.left{
+  transform: scaleX(-1) translate(+50%);
+  position: absolute;
+  left: 10%;
+}
+.right{
+  position: absolute;
+  left: 90%;
+  transform:  translate(-50%);
+}
+
+.back{
+  position: absolute;
+  top: 50%;
+}
+
+.name {
+  display: inline-block;
+
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+
+  font-size: 25px;
+  text-align: center;
+  
+  border: 3px solid rgb(240, 131, 131);
+  box-sizing: border-box;
+  
+  width: 280px;
+  height: 35px;
+
+  background-color: rgb(240, 131, 131,0.4);
+}
+
+.change-btns{
+
+  position: absolute;
+  top: 76%;
+  
+  width: var(--ground-width);
+  height: 200px;
+}
+
+.dressing-room{
+  display: none;
+  
+}
+
+
+
+.change-back, .change-stair, .change-player {
+  width: 420px;
+  height: 40px;
+}
+
+.btn {
+  background-image: url('https://infinitestair.tgim4253.repl.co/button2.png');
+  background-size: cover;
+  border-radius: 20%;
+  height: 32px;
+  width: 32px;
+}
+
+
+
+.main-ui{
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translate(-50%);
+
+  text-align: center;
+  font-weight: bolder; 
+
+  white-space: nowrap;
+}
+.main-ui > .game-name {
+  color: white;
+  text-align: center;
+  font-size: 55px;
+  font-weight: bolder; 
+}
+
+.main-ui > .score {
+  background-color: rgb(241, 230, 200,0.7);
+  border: 5px solid rgb(241, 230, 200);
+  border-radius: 10%;
+  height: 180px;
+
+  font-size: 30px;
+  font-weight: bolder; 
+  color:black;
+}
+
+.player {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%);
+}
+.player > .player-img {
+  background-size: cover;
+  background-image: var(--player-url);
+
+  height: 105px;
+  width: 105px;
+}
+.player > .stair {
+  transform: translate(+8%,+6%);
+  height: 52.5px;
+  width: 90px; 
+  background-size: contain;
+}
+
+.play-btn {
+  position: absolute;
+
+  left: 100%;
+  top: 100%;
+  transform: translate(-110%,-110%);
+  background-image: url('https://infinitestair.tgim4253.repl.co/button.png');
+  background-size: cover;
+  border-radius: 20%;
+  height: 85px;
+  width: 85px;
+}
+
+.dress-btn {
+  position: absolute;
+
+  background-image: url('https://infinitestair.tgim4253.repl.co/dressBtn.png');
+
+  left: 0%;
+  top: 100%;
+  transform: translate(+10%,-110%);
+
+  background-size: cover;
+  border-radius: 20%;
+  height: 85px;
+  width: 85px;
+}
+
+.home-btn{
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  transform: translate(+10%);
+  background-image: url('https://infinitestair.tgim4253.repl.co/homeBtn.png');
+  background-size: cover;
+  border-radius: 30%;
+  height: 85px;
+  width: 85px;
+}
