@@ -4,7 +4,7 @@ const app = require("http").Server(appEx);
 const io = require("socket.io")(app);
 const fs = require("fs");
 
-app.listen(8080);
+app.listen(8080); 
 
 appEx.use("/views", express.static(__dirname + "/views"));
 
