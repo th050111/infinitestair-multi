@@ -240,6 +240,7 @@ function renderBlock() {
     });
   });
 }
+
 //좌표와 추가할 클래스이름, 삭제할 클래스이름
 function changeClassName(location, addName = null, deleteName = null, id) {
   const x = location[0];
