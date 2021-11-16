@@ -3,6 +3,9 @@ const playground = document.querySelector(".playground > ul");
 const stairImg = document.querySelector(".player .stair");
 const playerImg = document.querySelector(".player .player-img");
 const groundImg = document.querySelector(".playground > ul");
+const home = document.getElementById("home");
+
+let socket;
 
 let currentZoom =
   localStorage.getItem("zoom") === null
@@ -54,11 +57,26 @@ const PLAYER_MAX = 4;
 //변수들
 let currentY;
 
+function turnToGame(type) {
+  home.style.display = "none";
+  startGame(type);
+}
 //플레이버튼 누를 시
 document.querySelector(".play-btn").addEventListener("click", () => {
-  location.href = "game";
+  document.querySelector("#home .choose").style.display = "block";
 });
 
+document.querySelector(".choose .close-btn").addEventListener("click", () => {
+  document.querySelector("#home .choose").style.display = "none";
+});
+document.querySelector(".choose .single-btn").addEventListener("click", () => {
+  turnToGame("single");
+});
+document.querySelector(".choose .multi-btn").addEventListener("click", () => {
+  socket = io();
+  const rooms = getRoom();
+  console.log(rooms);
+});
 //드레스룸으로 이동
 function turnToDress() {
   mainMenu.style.display = "none";
