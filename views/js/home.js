@@ -3,6 +3,9 @@ const playground = document.querySelector(".playground > ul");
 const stairImg = document.querySelector(".player .stair");
 const playerImg = document.querySelector(".player .player-img");
 const groundImg = document.querySelector(".playground > ul");
+const home = document.getElementById("home");
+
+let socket;
 
 let currentZoom =
   localStorage.getItem("zoom") === null
@@ -54,10 +57,106 @@ const PLAYER_MAX = 4;
 //변수들
 let currentY;
 
+function turnToGame(type) {
+  home.style.display = "none";
+  startGame(type);
+}
 //플레이버튼 누를 시
 document.querySelector(".play-btn").addEventListener("click", () => {
-  location.href = "game";
+  document.querySelector("#home .choose").style.display = "block";
 });
+
+document.querySelector(".choose .close-btn").addEventListener("click", () => {
+  document.querySelector("#home .choose").style.display = "none";
+});
+document
+  .querySelector(".room-container .close-btn")
+  .addEventListener("click", () => {
+    document.querySelector(".room-container").style.display = "none";
+    socket.disconnect();
+  });
+document.querySelector(".choose .single-btn").addEventListener("click", () => {
+  turnToGame("single");
+});
+
+document.querySelector(".room-btn .join-room").addEventListener("click", () => {
+  if (
+    document.querySelector(".room-list-container").querySelector(".selected")
+  ) {
+    alert("join!!");
+    joinRoom(
+      document
+        .querySelector(".room-list-container")
+        .querySelector(".selected")
+        .querySelector(".list-name").innerHTML
+    );
+  }
+});
+document
+  .querySelector(".room-btn .start-room")
+  .addEventListener("click", () => {
+    if (
+      document.querySelector(".room-list-container").querySelector(".selected")
+    ) {
+      socket.emit("game-start-master");
+      socket.emit("game-start");
+      turnToGame(
+        "multi",
+        document
+          .querySelector(".room-list-container")
+          .querySelector(".selected")
+          .querySelector(".list-name").innerHTML
+      );
+    }
+  });
+
+function joinRoom(name) {
+  socket.emit("join-room", name);
+}
+document.querySelector(".choose .multi-btn").addEventListener("click", () => {
+  document.querySelector(".room-container").style.display = "block";
+  socket = io();
+  socket.on("get-start", () => {
+    console.log("hi");
+    socket.emit("game-start");
+    turnToGame("multi");
+  });
+  socket.emit("get-room", (data) => {
+    renderRooms(data);
+  });
+});
+
+function selectRoom() {
+  const list = document.querySelector(".room-list").classList.value;
+  if (list.indexOf("selceted") !== -1) return;
+  if (document.querySelector(".room-list-container").querySelector(".selected"))
+    document
+      .querySelector(".room-list-container")
+      .querySelector(".selected")
+      .classList.remove("selecected");
+  document.querySelector(".room-list").classList.add("selected");
+}
+
+function renderRooms(rooms) {
+  const ul = document.querySelector(".room-list-container");
+  ul.innerHTML = "";
+  Object.keys(rooms).forEach((room) => {
+    // if (room !== "ready") {
+    const div = document.createElement("div");
+    div.classList = "room-list";
+    const name = document.createElement("span");
+    name.classList = "list-name";
+    const count = document.createElement("span");
+    count.classList = "list-room-count";
+    name.innerHTML = rooms[room].name;
+    count.innerHTML = rooms[room].players.length;
+    div.appendChild(name);
+    div.appendChild(count);
+    div.addEventListener("click", () => selectRoom());
+    ul.appendChild(div);
+    // }
+  });
+}
 
 //드레스룸으로 이동
 function turnToDress() {

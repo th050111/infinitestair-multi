@@ -6,50 +6,87 @@
     <title>무한의 계단</title>
     <link href="/views/css/gameCss.css" rel="stylesheet" type="text/css" />
     <link href="/views/css/main.css" rel="stylesheet" type="text/css" />
+    <script src="/socket.io/socket.io.js"></script>
   </head>
 
   <body>
     <br />
     <br />
-    <div class="playground">
-      <ul>
-        <div class="main-menu">
-          <div class="main-ui">
-            <div class="game-name">대건의 계단</div>
-            <div class="score">
-              LAST <br />
-              <span class="last-score">0</span> <br />
-              BEST <br /><span>0</span>
+    <div id="home">
+      <div class="playground">
+        <div class="choose">
+          <div class="choose-ui">
+            <div class="choose-btn">
+              <div class="single-btn">single</div>
+              <div class="multi-btn">multi</div>
             </div>
+            <div class="close-btn">x</div>
           </div>
-          <div class="play-btn"></div>
-          <div class="dress-btn" onclick="turnToDress()"></div>
-        </div>
-        <div class="dressing-room">
-          <div class="change-btns">
-            <div class="change-back">
-              <div class="btn left left-back"></div>
-              <span class="name">back</span>
-              <div class="btn right right-back"></div>
+          <div class="room-container">
+            <div class="room-list-container">
+              <div class="room-list">
+                안녕하세요 0/1
+              </div>
             </div>
-            <div class="change-player">
-              <div class="btn left left-player"></div>
-              <span class="name">player</span>
-              <div class="btn right right-player"></div>
+
+            <div class="room-info">
+              <span class="room-name"></span>
+              <span class="room-count"></span>
+              <span class="room-player-list"></span>
             </div>
-            <div class="change-stair">
-              <div class="btn left left-stair"></div>
-              <span class="name">stair</span>
-              <div class="btn right right-stair"></div>
+            <div class="room-btn">
+              <div class="create-room">create</div>
+              <div class="join-room">join</div>
+              <div class="start-room">start</div>
             </div>
+
+            <div class="close-btn">x</div>
           </div>
-          <div class="home-btn" onclick="turnToMain()"></div>
         </div>
-        <div class="player">
-          <div class="player-img"></div>
-          <div class="stair"></div>
-        </div>
-      </ul>
+        <ul>
+          <div class="main-menu">
+            <div class="main-ui">
+              <div class="game-name">대건의 계단</div>
+              <div class="score">
+                LAST <br />
+                <span class="last-score">0</span> <br />
+                BEST <br /><span>0</span>
+              </div>
+            </div>
+            <div class="play-btn"></div>
+            <div class="dress-btn" onclick="turnToDress()"></div>
+          </div>
+          <div class="dressing-room">
+            <div class="change-btns">
+              <div class="change-back">
+                <div class="btn left left-back"></div>
+                <span class="name">back</span>
+                <div class="btn right right-back"></div>
+              </div>
+              <div class="change-player">
+                <div class="btn left left-player"></div>
+                <span class="name">player</span>
+                <div class="btn right right-player"></div>
+              </div>
+              <div class="change-stair">
+                <div class="btn left left-stair"></div>
+                <span class="name">stair</span>
+                <div class="btn right right-stair"></div>
+              </div>
+            </div>
+            <div class="home-btn" onclick="turnToMain()"></div>
+          </div>
+          <div class="player">
+            <div class="player-img"></div>
+            <div class="stair"></div>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 게임화면 -->
+    <div id="game">
+      <div class="wrapper"><br /><br /></div>
     </div>
     <div id="zoom-btn">
       <div class="zoom-in">+</div>
@@ -58,5 +95,6 @@
     </div>
     <script src="/views/js/block.js"></script>
     <script src="/views/js/home.js"></script>
+    <script src="/views/js/stair.js"></script>
   </body>
 </html>

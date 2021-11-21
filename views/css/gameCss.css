@@ -1,36 +1,43 @@
-.stair{
+.stair {
   background-color: black;
   border-radius: 10%;
   box-sizing: border-box;
 }
-.stair.snow{
-  background-image: url('/views/img/stair/stair2.png');
+.stair.snow {
+  background-image: url("/views/img/stair/stair2.png");
 }
-.stair.grain{
-  background-image: url('/views/img/stair/stair1.png');
+.stair.grain {
+  background-image: url("/views/img/stair/stair1.png");
 }
-.stair.stone{
-  background-image: url('/views/img/stair/stair3.png');
+.stair.stone {
+  background-image: url("/views/img/stair/stair3.png");
 }
-.stair.sharp-snow{
-  background-image: url('/views/img/stair/stair4.png');
+.stair.sharp-snow {
+  background-image: url("/views/img/stair/stair4.png");
 }
 
-.playground > ul.lighthouse{
-  background-image: url('/views/img/back/background1.jpg');
+.playground > ul.lighthouse {
+  background-image: url("/views/img/back/background1.jpg");
 }
-.playground > ul.night{
-  background-image: url('/views/img/back/background2.jpg');
+.playground > ul.night {
+  background-image: url("/views/img/back/background2.jpg");
 }
-.playground > ul.town{
-  background-image: url('/views/img/back/background3.jpg');
+.playground > ul.town {
+  background-image: url("/views/img/back/background3.jpg");
 }
-.wrapper{
+.wrapper {
   display: flex;
 }
 * {
   margin: 0;
   padding: 0;
+}
+
+:root {
+  --stair-height: 35px;
+  --stair-width: 60px;
+  --ground-width: calc(var(--stair-width) * 7);
+  --ground-heigt: calc(var(--stair-height) * 20);
 }
 
 ul {
@@ -46,10 +53,6 @@ body {
 
 /* X > Y : 직계 자손 선택 */
 .playground > ul {
-  --stair-height: 35px;
-  --stair-width: 60px;
-  --ground-width: calc(var(--stair-width) * 7);
-
   position: relative;
   border: 1px solid #333;
   outline: 10px solid rgb(116, 103, 240);

@@ -1,21 +1,19 @@
-
-
 /* .main-menu {
   display: none;
 } */
 
-.left{
+.left {
   transform: scaleX(-1) translate(+50%);
   position: absolute;
   left: 10%;
 }
-.right{
+.right {
   position: absolute;
   left: 90%;
-  transform:  translate(-50%);
+  transform: translate(-50%);
 }
 
-.back{
+.back {
   position: absolute;
   top: 50%;
 }
@@ -29,55 +27,51 @@
 
   font-size: 25px;
   text-align: center;
-  
+
   border: 3px solid rgb(240, 131, 131);
   box-sizing: border-box;
-  
+
   width: 280px;
   height: 35px;
 
-  background-color: rgb(240, 131, 131,0.4);
+  background-color: rgb(240, 131, 131, 0.4);
 }
 
-.change-btns{
-
+.change-btns {
   position: absolute;
   top: 76%;
-  
+
   width: var(--ground-width);
   height: 200px;
 }
 
-.dressing-room{
+.dressing-room {
   display: none;
-  
 }
 
-
-
-.change-back, .change-stair, .change-player {
+.change-back,
+.change-stair,
+.change-player {
   width: 420px;
   height: 40px;
 }
 
 .btn {
-  background-image: url('https://infinitestair.tgim4253.repl.co/button2.png');
+  background-image: url("https://infinitestair.tgim4253.repl.co/button2.png");
   background-size: cover;
   border-radius: 20%;
   height: 32px;
   width: 32px;
 }
 
-
-
-.main-ui{
+.main-ui {
   position: absolute;
   top: 14%;
   left: 50%;
   transform: translate(-50%);
 
   text-align: center;
-  font-weight: bolder; 
+  font-weight: bolder;
 
   white-space: nowrap;
 }
@@ -85,18 +79,18 @@
   color: white;
   text-align: center;
   font-size: 55px;
-  font-weight: bolder; 
+  font-weight: bolder;
 }
 
 .main-ui > .score {
-  background-color: rgb(241, 230, 200,0.7);
+  background-color: rgb(241, 230, 200, 0.7);
   border: 5px solid rgb(241, 230, 200);
   border-radius: 10%;
   height: 180px;
 
   font-size: 30px;
-  font-weight: bolder; 
-  color:black;
+  font-weight: bolder;
+  color: black;
 }
 
 .player {
@@ -113,9 +107,9 @@
   width: 105px;
 }
 .player > .stair {
-  transform: translate(+8%,+6%);
+  transform: translate(+8%, +6%);
   height: 52.5px;
-  width: 90px; 
+  width: 90px;
   background-size: contain;
 }
 
@@ -124,8 +118,8 @@
 
   left: 100%;
   top: 100%;
-  transform: translate(-110%,-110%);
-  background-image: url('https://infinitestair.tgim4253.repl.co/button.png');
+  transform: translate(-110%, -110%);
+  background-image: url("https://infinitestair.tgim4253.repl.co/button.png");
   background-size: cover;
   border-radius: 20%;
   height: 85px;
@@ -135,11 +129,11 @@
 .dress-btn {
   position: absolute;
 
-  background-image: url('https://infinitestair.tgim4253.repl.co/dressBtn.png');
+  background-image: url("https://infinitestair.tgim4253.repl.co/dressBtn.png");
 
   left: 0%;
   top: 100%;
-  transform: translate(+10%,-110%);
+  transform: translate(+10%, -110%);
 
   background-size: cover;
   border-radius: 20%;
@@ -147,14 +141,122 @@
   width: 85px;
 }
 
-.home-btn{
+.home-btn {
   position: absolute;
   left: 0%;
   top: 0%;
   transform: translate(+10%);
-  background-image: url('https://infinitestair.tgim4253.repl.co/homeBtn.png');
+  background-image: url("https://infinitestair.tgim4253.repl.co/homeBtn.png");
   background-size: cover;
   border-radius: 30%;
   height: 85px;
   width: 85px;
+}
+
+.choose {
+  position: absolute;
+  /* display: none; */
+  width: 100%;
+  height: 100%;
+
+  z-index: 99;
+}
+.choose .choose-ui {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+
+  width: calc(var(--ground-width) * 0.7);
+  height: 200px;
+  background-color: rgb(0, 255, 255, 0.5);
+  border: 1px solid black;
+}
+.choose .choose-ui .choose-btn {
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  display: flex;
+  width: 100%;
+  height: 100px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.choose-btn div {
+  width: 30%;
+  height: 90%;
+  text-align: center;
+  line-height: 90px;
+  background-color: white;
+}
+
+.close-btn {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  font-size: 25px;
+  text-align: center;
+  line-height: 25px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+}
+
+.room-container {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: var(--ground-width);
+  height: var(--ground-heigt);
+}
+.room-list-container {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, 0%);
+  width: 55%;
+  height: 45%;
+
+  background-color: aqua;
+
+  border: 3px solid black;
+}
+
+.room-btn div {
+  position: absolute;
+  right: 4.7%;
+  width: calc(var(--stair-width) * 1.2);
+  height: calc(var(--stair-width) * 1.2);
+  background-color: gray;
+
+  text-align: center;
+  line-height: calc(var(--stair-width) * 1.2);
+  border: 1px solid black;
+}
+
+.create-room {
+  top: 30%;
+}
+.join-room {
+  top: 40%;
+}
+.start-room {
+  top: 50%;
+}
+.room-info {
+  position: absolute;
+  width: 40%;
+  height: 25%;
+
+  top: 27%;
+  left: -20%;
+  background-color: black;
+}
+
+.room-list:hover{
+  background-color: gray;
+}
+.room-list.selected{
+  background-color: gray;
 }

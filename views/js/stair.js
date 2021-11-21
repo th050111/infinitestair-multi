@@ -1,4 +1,5 @@
 const wrapper = document.querySelector(".wrapper");
+const game = document.getElementById("game");
 
 //줄 생성
 function prependNewLine(playground, type) {
@@ -32,7 +33,6 @@ const BLOCK_HEIGHT = 35;
 
 //서버관련 변수들
 let myId = "";
-const socket = io();
 
 const players = [];
 const playerMap = {};
@@ -47,6 +47,42 @@ let toCreatBlocks;
 let isRun = false;
 let moveTimer = null;
 
+//실행
+function startGame(type, name) {
+  game.style.display = "block";
+  if (type === "single") {
+    socket = io.connect("/single");
+    socket.on("start", () => {
+      init();
+    });
+    socket.on("user_id", (data) => {
+      myId = data;
+    });
+    socket.on("join_user", function (data) {
+      joinUser(data);
+    });
+    socket.on("update_state", function (data) {
+      updateState(data);
+    });
+  } else if (type === "multi") {
+    socket.on("user_id", (data) => {
+      myId = data;
+    });
+    socket.on("start", () => {
+      init();
+    });
+    socket.on("leave_user", function (data) {
+      leaveUser(data);
+    });
+    socket.on("join_user", function (data) {
+      console.log('join')
+      joinUser(data);
+    });
+    socket.on("update_state", function (data) {
+      updateState(data);
+    });
+  }
+}
 //서버 연결
 
 function Player(id) {
@@ -64,9 +100,8 @@ function joinUser({ id, stairs, skins }) {
   createNewGround(id, skins.background);
   return player;
 }
-function updateState({ id, stairs, skins}) {
+function updateState({ id, stairs, skins }) {
   let player = playerMap[id];
-  console.log(skins)
   if (!player) {
     return;
   }
@@ -85,23 +120,6 @@ function leaveUser(id) {
   document.getElementById(id).remove();
   //renderBlock();
 }
-
-socket.on("user_id", (data) => {
-  myId = data;
-});
-socket.on("start", () => {
-  init();
-});
-socket.on("leave_user", function (data) {
-  leaveUser(data);
-});
-socket.on("join_user", function (data) {
-  joinUser(data);
-});
-socket.on("update_state", function (data) {
-  console.log(data)
-  updateState(data);
-});
 
 function sendData() {
   let curPlayer = playerMap[myId];
