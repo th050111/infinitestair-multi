@@ -112,50 +112,61 @@ io.on("connection", (socket) => {
   });
 
   const newPlayer = joinGame(socket);
-
+  socket.on("hi", () => {
+    console.log("hi");
+  });
   socket.on("join-room", (name) => {
-    leaveRoom(socket.id);
-    joinRoom(socket.id, name);
+    const currentRoom = leaveRoom(socket.id, socket);
+    joinRoom(socket.id, name, socket);
+    socket.leave(currentRoom);
+    socket.join(name);
+    console.log(`${socket.id}님이 ${name}방에 접속하셨습니다`);
   });
   socket.on("get-room", (func) => {
-    console.log(func)
-    func(rooms)
+    console.log(func);
+    func(rooms);
   });
-  // socket.emit("user_id", socket.id);
-  // //현재 접속중인 플레이어 얻어오기
-  // for (let i = 0; i < players.length; i++) {
-  //   let player = players[i];
-  //   socket.emit("join_user", {
-  //     id: player.id,
-  //     stairs: player.stairs,
-  //     skins: player.skins,
-  //   });
-  // }
+  socket.on("game-start-master", () => {
+    console.log(playerMap[socket.id].room);
+    socket.to(playerMap[socket.id].room).emit("get-start");
+    console.log("게임 마스터가 방을 시작하셨습니다");
+  });
+  socket.on("game-start", () => {
+    console.log("게임 시작!!");
+    socket.emit("hi");
+    socket.emit("user_id", socket.id);
+    //현재 접속중인 플레이어 얻어오기
+    for (let i = 0; i < rooms[playerMap[socket.id].room].players.length; i++) {
+      let player = rooms[playerMap[socket.id].room].players[i];
+      console.log(i);
+      console.log(player);
+      socket.emit("join_user", {
+        id: player.id,
+        stairs: player.stairs,
+        skins: player.skins,
+      });
+    }
 
-  // //자신외의 클라이언트들에 새로운 유저 알림
-  // socket.broadcast.emit("join_user", {
-  //   id: socket.id,
-  //   skins: newPlayer.skins,
-  // });
-  // socket.emit("start");
-  // //stairs 변경요청을 받았을때
-  // socket.on("send_stairs", function (stringData) {
-  //   const data = JSON.parse(stringData);
-  //   socket.broadcast.emit("update_state", {
-  //     id: data.id,
-  //     stairs: data.stairs,
-  //     skins: data.skins,
-  //   });
-  //   for (let i = 0; i < players.length; i++) {
-  //     if (players[i].id == data.id) {
-  //       players[i].stairs = data.stairs;
-  //       players[i].skins = data.skins;
-  //       break;
-  //     }
-  //   }
-  //   playerMap[data.id].stair = data.stairs;
-  //   playerMap[data.id].skins = data.skins;
-  // });
+    socket.emit("start");
+    //stairs 변경요청을 받았을때
+    socket.on("send_stairs", function (stringData) {
+      const data = JSON.parse(stringData);
+      socket.broadcast.emit("update_state", {
+        id: data.id,
+        stairs: data.stairs,
+        skins: data.skins,
+      });
+      for (let i = 0; i < players.length; i++) {
+        if (players[i].id == data.id) {
+          players[i].stairs = data.stairs;
+          players[i].skins = data.skins;
+          break;
+        }
+      }
+      playerMap[data.id].stair = data.stairs;
+      playerMap[data.id].skins = data.skins;
+    });
+  });
 });
 
 single.on("connection", (socket) => {

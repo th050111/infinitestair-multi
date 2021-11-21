@@ -241,6 +241,9 @@
 .join-room {
   top: 40%;
 }
+.start-room {
+  top: 50%;
+}
 .room-info {
   position: absolute;
   width: 40%;
@@ -252,5 +255,8 @@
 }
 
 .room-list:hover{
+  background-color: gray;
+}
+.room-list.selected{
   background-color: gray;
 }

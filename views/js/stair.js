@@ -48,12 +48,11 @@ let isRun = false;
 let moveTimer = null;
 
 //실행
-function startGame(type) {
+function startGame(type, name) {
   game.style.display = "block";
   if (type === "single") {
     socket = io.connect("/single");
     socket.on("start", () => {
-      console.log("hi");
       init();
     });
     socket.on("user_id", (data) => {
@@ -63,7 +62,6 @@ function startGame(type) {
       joinUser(data);
     });
     socket.on("update_state", function (data) {
-      console.log(data);
       updateState(data);
     });
   } else if (type === "multi") {
@@ -77,10 +75,10 @@ function startGame(type) {
       leaveUser(data);
     });
     socket.on("join_user", function (data) {
+      console.log('join')
       joinUser(data);
     });
     socket.on("update_state", function (data) {
-      console.log(data);
       updateState(data);
     });
   }
@@ -104,7 +102,6 @@ function joinUser({ id, stairs, skins }) {
 }
 function updateState({ id, stairs, skins }) {
   let player = playerMap[id];
-  console.log(skins);
   if (!player) {
     return;
   }
@@ -233,18 +230,6 @@ function createNewBlocks() {
   if (extra === 0) {
     currentBlocks.pop();
   }
-}
-
-function joinRoom(name) {
-  socket.emit("join-room", name);
-}
-function getRoom() {
-  let rooms;
-  socket.emit("get-room", (data) => {
-    console.log(data)
-    rooms = data;
-  });
-  return rooms;
 }
 
 //블럭 생성
